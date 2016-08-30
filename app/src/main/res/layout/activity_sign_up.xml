@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:text="@string/signup"
         android:id="@+id/button3"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:onClick="clickSignUpSign" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -187,7 +188,8 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:id="@+id/ragAvata">
 
             <RadioButton
                 android:layout_width="wrap_content"
