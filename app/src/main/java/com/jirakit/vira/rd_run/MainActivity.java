@@ -11,11 +11,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Explicit
         private Context context;
-        private String myUserString, myPasswordString;
+        private String myUserString, myPasswordString,truePasswordString,nameString,surnameString,idString;
         private static final String urlJSON = "http://swiftcodingthai.com/rd/get_user_master.php";
+        private boolean statusABoolean = true;
 
         public SynUser(Context context, String myUserString, String myPasswordString) {
             this.context = context;
@@ -78,6 +83,41 @@ public class MainActivity extends AppCompatActivity {
             super.onPostExecute(s);
 
             Log.d("31AugV2","JSoN ==> "+s);
+
+            try{
+                JSONArray jsonArray = new JSONArray(s);
+                for(int i=0; i<jsonArray.length();i+=1){
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    if(myUserString.equals(jsonObject.getString("User"))){
+                        statusABoolean = false;
+                        truePasswordString = jsonObject.getString("Password");
+                        nameString = jsonObject.getString("Name");
+                        surnameString = jsonObject.getString("Surname");
+                        idString = jsonObject.getString("id");
+
+                    } // if
+
+                } // for
+                if(statusABoolean){
+                    //User False
+                    MyAlert myAlert = new MyAlert();
+                    myAlert.myDialog(context,R.drawable.kon48,"User False","ไม่มี"+myUserString+" ใน ฐานข้อมูล");
+                }else if(myPasswordString.equals(truePasswordString)){
+                   //password True
+                    Toast.makeText(context,"Welcome "+nameString+" "+surnameString,
+                            Toast.LENGTH_SHORT).show();
+
+                }else {
+                    //password False
+                    MyAlert myAlert = new MyAlert();
+                    myAlert.myDialog(context,R.drawable.bird48,"Password False","Please Try again Password False");
+                }
+
+
+            }catch (Exception e){
+               Log.d("31AugV3","e onPost ==> "+e.toString());
+
+            }
 
         } // onPost
 
