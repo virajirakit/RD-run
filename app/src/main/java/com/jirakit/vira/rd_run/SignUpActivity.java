@@ -27,7 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton avata1RadioButton, avata2RadioButton, avata3RadioButton, avata4RadioButton, avata5RadioButton;
     private String nameString, surnameString, userString, passwordString, avataString;
-    private static final String urlPHP = "http://swiftcodingthai.com/rd/add_user_vira.php";
+    private static final String urlPHP = "http://swiftcodingthai.com/rd/add_user_master.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
