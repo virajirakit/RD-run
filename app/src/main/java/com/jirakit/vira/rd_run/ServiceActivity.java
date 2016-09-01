@@ -32,6 +32,7 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
