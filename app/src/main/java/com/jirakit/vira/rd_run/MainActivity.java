@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity {
                     myAlert.myDialog(context,R.drawable.kon48,"User False","ไม่มี"+myUserString+" ใน ฐานข้อมูล");
                 }else if(myPasswordString.equals(truePasswordString)){
                    //password True
+
+                    Intent intent = new Intent(MainActivity.this,ServiceActivity.class);
+                    startActivity(intent);
+
                     Toast.makeText(context,"Welcome "+nameString+" "+surnameString,
                             Toast.LENGTH_SHORT).show();
 
