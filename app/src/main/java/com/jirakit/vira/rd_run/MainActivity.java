@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.StaticLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView;
     private EditText userEditText, passwordEditText;
     private String userString, passwordString;
+    private CheckBox checkBox;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView6);
         userEditText = (EditText) findViewById(R.id.editText5);
         passwordEditText = (EditText) findViewById(R.id.editText6);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
+
 
         // Load Image from Server
         Picasso.with(this).load("http://swiftcodingthai.com/rd/Image/rd_logo.png")
@@ -105,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
                     myAlert.myDialog(context,R.drawable.kon48,"User False","ไม่มี"+myUserString+" ใน ฐานข้อมูล");
                 }else if(myPasswordString.equals(truePasswordString)){
                    //password True
+
+                    if(checkBox.isChecked()){
+                        Log.d("2SepV5","CheckBox is Checked");
+
+                        MyManage myManage = new MyManage(context);
+
+                    }
 
                     Intent intent = new Intent(MainActivity.this,ServiceActivity.class);
 
