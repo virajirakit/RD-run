@@ -17,6 +17,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.okhttp.Call;
@@ -144,9 +145,18 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
                     lngDoubles[i] = Double.parseDouble(jsonObject.getString("Lng"));
 
                     //Create Marker
+                    MyConstant myConstant = new MyConstant();
+                    int[] iconInts=myConstant.getAvataInts();
+
                     googleMap.addMarker(new MarkerOptions()
                         .position(new LatLng(latDoubles[i],lngDoubles[i]))
-                    );
+                    .icon(BitmapDescriptorFactory.fromResource(iconInts[avataInts[i]]))
+                    .title(nameStrings[i]+" "+surnameStrings[i]));
+
+                    Log.d("2SepV3","Name ( "+i+" ) = "+nameStrings[i]);
+                    Log.d("2SepV3","Lat ( "+i+" ) = "+latDoubles[i]);
+                    Log.d("2SepV3","Lng ( "+i+" ) = "+lngDoubles[i]);
+                    Log.d("2SepV3","===============================");
 
                 } // for
 
@@ -229,7 +239,7 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
 
         //Setup Center of Map
         LatLng latLng = new LatLng(userLatADouble,userLngADouble);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
 
         // Loop
         myLoop();
