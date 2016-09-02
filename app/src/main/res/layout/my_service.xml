@@ -49,28 +49,32 @@
             android:layout_height="wrap_content"
             android:text="Normal"
             android:id="@+id/button4"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickNormal" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Satellite"
             android:id="@+id/button5"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickSatellite" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Terrain"
             android:id="@+id/button6"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickTerrain" />
 
         <Button
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Hybrid"
             android:id="@+id/button7"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="clickHybrid" />
     </LinearLayout>
 
 

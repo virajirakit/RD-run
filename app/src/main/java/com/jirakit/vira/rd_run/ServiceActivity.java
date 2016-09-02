@@ -10,6 +10,7 @@ import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.squareup.okhttp.Call;
 import com.squareup.okhttp.Callback;
@@ -44,7 +46,7 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
     private LocationManager locationManager;
     private Criteria criteria;
     private static final String urlPHP = "http://swiftcodingthai.com/rd/edit_location_vira.php";
-
+    private boolean statusABoolean = true;
 
 
     @Override
@@ -88,6 +90,24 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
 
     } // Main Method
 
+   public void clickNormal(View view){
+    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+   }
+
+    public void clickSatellite(View view){
+    mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+    }
+
+    public void clickTerrain(View view){
+    mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+    }
+
+    public void clickHybrid(View view){
+    mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+    }
+
+
+
     private class SynAllUser extends AsyncTask<Void, Void, String>{
 
         //Explicit
@@ -97,6 +117,8 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
         private String[] nameStrings,surnameStrings;
         private int[] avataInts;
         private double[] latDoubles, lngDoubles;
+
+
 
 
         public SynAllUser(Context context, GoogleMap googleMap) {
@@ -159,6 +181,14 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
                     Log.d("2SepV3","===============================");
 
                 } // for
+
+              googleMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                  @Override
+                  public void onMapLongClick(LatLng latLng) {
+                      statusABoolean = !statusABoolean;
+                      Log.d("2SepV4","Status ==> "+statusABoolean);
+                  }
+              });
 
             }catch (Exception e){
 
@@ -253,7 +283,9 @@ public class ServiceActivity extends FragmentActivity implements OnMapReadyCallb
         Log.d("1SepV2","Lng ==> "+userLngADouble);
 
         editLatLngOnServer();
+        if(statusABoolean){
         createMarker();
+        }
 
         //Post Delay
         Handler handler = new Handler();
